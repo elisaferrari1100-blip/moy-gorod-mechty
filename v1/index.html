@@ -1,0 +1,593 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Мой Город Мечты — макет 1, Воздушный город</title>
+  <link rel="icon" href="../assets/favicon.ico" sizes="any" />
+  <link rel="icon" type="image/png" sizes="32x32" href="../assets/favicon-32.png" />
+  <link rel="apple-touch-icon" href="../assets/favicon-180.png" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Nunito:ital,wght@0,400;0,500;0,600;0,700;0,800;1,400&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --bg: #F6F0E8;
+      --paper: #FFFBF7;
+      --ink: #2C2825;
+      --muted: #5C554E;
+      --line: #E6DCD0;
+      --peach: #F0C4B0;
+      --peach-d: #C56A4A;
+      --sage: #7FA98F;
+      --sage-d: #3E6F58;
+      --sky: #C5D4E6;
+      --sky-d: #5A738C;
+      --butter: #EED9A3;
+      --blush: #EBC0C3;
+      --shadow: 0 18px 40px rgba(80, 60, 40, .08);
+      --radius: 28px;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body {
+      font-family: Nunito, system-ui, sans-serif;
+      background: var(--bg);
+      color: var(--ink);
+      line-height: 1.55;
+      font-size: 17px;
+    }
+    a { color: inherit; text-decoration: none; }
+    img, svg { display: block; max-width: 100%; }
+    .wrap { width: min(1160px, calc(100% - 40px)); margin: 0 auto; }
+    .sr { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0,0,0,0); }
+
+    /* header */
+    .top {
+      position: sticky; top: 0; z-index: 20;
+      background: rgba(246, 240, 232, .9);
+      backdrop-filter: blur(16px);
+      border-bottom: 1px solid rgba(230, 220, 208, .7);
+    }
+    .top-inner {
+      width: min(1160px, calc(100% - 40px));
+      margin: 0 auto;
+      display: flex; align-items: center; justify-content: space-between;
+      min-height: 76px; gap: 24px;
+    }
+    .logo { display: flex; align-items: center; gap: 12px; font-weight: 800; font-size: 18px; letter-spacing: -.02em; }
+    .logo-mark { width: 48px; height: 48px; flex: none; object-fit: contain; display: block; }
+    .nav { display: flex; align-items: center; gap: 26px; font-weight: 600; font-size: 15px; color: var(--muted); }
+    .nav a:hover { color: var(--ink); }
+    .btn {
+      display: inline-flex; align-items: center; justify-content: center;
+      background: var(--sage-d); color: #fff; font-weight: 700;
+      border: 0; border-radius: 999px; padding: 12px 22px; cursor: pointer;
+      font-family: inherit; font-size: 15px; box-shadow: 0 8px 18px rgba(62,111,88,.2);
+    }
+    .btn:hover { filter: brightness(1.05); }
+    .btn-ghost { background: #fff; color: var(--ink); box-shadow: none; border: 1px solid var(--line); }
+    .burger, #nav-toggle { display: none; }
+
+    /* hero */
+    .hero { padding: 48px 0 28px; overflow: hidden; position: relative; }
+    .hero-grid { display: grid; grid-template-columns: 1fr 1.05fr; gap: 36px; align-items: center; }
+    .eyebrow {
+      display: inline-flex; align-items: center; gap: 8px;
+      background: #fff; border: 1px solid var(--line);
+      padding: 6px 14px; border-radius: 999px;
+      font-weight: 700; font-size: 13px; color: var(--sage-d); letter-spacing: .02em;
+    }
+    .hero h1 {
+      font-size: clamp(40px, 5vw, 64px);
+      line-height: 1.08; letter-spacing: -.03em; font-weight: 800;
+      margin: 18px 0 16px;
+    }
+    .hero h1 span { color: var(--sage-d); }
+    .lead { font-size: 19px; color: var(--muted); max-width: 520px; }
+    .hero-actions { display: flex; gap: 12px; margin-top: 28px; flex-wrap: wrap; }
+    .hero-art {
+      background: linear-gradient(180deg, #E8F0F6 0%, #F6EDE4 55%, #F0E4D4 100%);
+      border-radius: 40px; padding: 18px 8px 0;
+      box-shadow: var(--shadow);
+      position: relative; min-height: 420px;
+    }
+    .blob { position: absolute; border-radius: 50%; filter: blur(2px); pointer-events: none; }
+    .stats {
+      display: grid; grid-template-columns: repeat(4, 1fr); gap: 14px;
+      margin-top: -8px; position: relative; z-index: 2;
+    }
+    .stat {
+      background: var(--paper); border-radius: 22px; padding: 20px 18px;
+      box-shadow: var(--shadow); border: 1px solid rgba(255,255,255,.8);
+    }
+    .stat b { display: block; font-size: 28px; font-weight: 800; letter-spacing: -.03em; }
+    .stat span { color: var(--muted); font-size: 14px; font-weight: 600; }
+
+    /* sections */
+    section { padding: 80px 0; }
+    .sec-h { max-width: 640px; margin-bottom: 36px; }
+    .sec-h h2 { font-size: clamp(30px, 3.4vw, 42px); letter-spacing: -.03em; line-height: 1.15; font-weight: 800; }
+    .sec-h p { color: var(--muted); margin-top: 10px; font-size: 18px; }
+    .kicker { font-weight: 800; font-size: 13px; letter-spacing: .12em; text-transform: uppercase; color: var(--peach-d); margin-bottom: 8px; }
+
+    .zones { display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; }
+    .zone {
+      background: var(--paper); border-radius: var(--radius); padding: 22px 20px 24px;
+      border: 1px solid #efe7dc; box-shadow: 0 10px 24px rgba(80,60,40,.05);
+      min-height: 230px;
+    }
+    .zone .ico { width: 56px; height: 56px; border-radius: 18px; display: grid; place-items: center; margin-bottom: 16px; }
+    .zone h3 { font-size: 19px; margin-bottom: 8px; letter-spacing: -.02em; }
+    .zone p { color: var(--muted); font-size: 15px; }
+
+    .day { background: #EFE6DA; }
+    .steps { display: grid; grid-template-columns: repeat(4, 1fr); gap: 18px; }
+    .step { background: var(--paper); border-radius: var(--radius); padding: 26px 22px; position: relative; }
+    .step .n { font-weight: 800; font-size: 36px; color: var(--peach); letter-spacing: -.04em; line-height: 1; margin-bottom: 12px; }
+    .step h3 { margin-bottom: 8px; font-size: 20px; }
+    .step p { color: var(--muted); font-size: 15px; }
+
+    .bday { display: grid; grid-template-columns: 1.05fr .95fr; gap: 28px; align-items: stretch; }
+    .bday-card {
+      background: linear-gradient(160deg, #F6D7C8, #F3E2C4 55%, #E6D5F0);
+      border-radius: 36px; padding: 36px; min-height: 380px; position: relative; overflow: hidden;
+    }
+    .bday-list { display: flex; flex-direction: column; gap: 12px; margin-top: 22px; }
+    .bday-list li {
+      list-style: none; background: var(--paper); border-radius: 18px; padding: 14px 16px;
+      font-weight: 600; display: flex; gap: 12px; align-items: center;
+    }
+    .dot { width: 10px; height: 10px; border-radius: 50%; background: var(--sage-d); flex: none; }
+
+    .tickets { display: grid; grid-template-columns: repeat(3, 1fr); gap: 18px; }
+    .ticket {
+      background: var(--paper); border-radius: 28px; padding: 28px 24px;
+      border: 1px solid #efe7dc; box-shadow: var(--shadow);
+    }
+    .ticket.featured { background: var(--sage-d); color: #fff; border-color: transparent; }
+    .ticket.featured p, .ticket.featured .price-note { color: rgba(255,255,255,.82); }
+    .ticket h3 { font-size: 22px; margin-bottom: 8px; }
+    .price { font-size: 32px; font-weight: 800; letter-spacing: -.03em; margin: 16px 0 6px; }
+    .price-note { color: var(--muted); font-size: 14px; font-weight: 600; }
+    .ticket ul { margin: 18px 0 0; padding: 0; }
+    .ticket li { list-style: none; padding: 7px 0; border-top: 1px solid rgba(0,0,0,.06); font-size: 15px; }
+    .ticket.featured li { border-top-color: rgba(255,255,255,.15); }
+
+    table.sched { width: 100%; border-collapse: separate; border-spacing: 0; background: var(--paper); border-radius: 24px; overflow: hidden; }
+    .sched th, .sched td { text-align: left; padding: 16px 20px; border-bottom: 1px solid var(--line); }
+    .sched th { background: #EFE6DA; font-size: 13px; letter-spacing: .08em; text-transform: uppercase; }
+    .sched tr:last-child td { border-bottom: 0; }
+    .note { margin-top: 12px; color: var(--muted); font-size: 14px; }
+
+    .gallery { display: grid; grid-template-columns: 2fr 1fr 1fr; grid-template-rows: 180px 180px; gap: 14px; }
+    .g { border-radius: 24px; display: flex; align-items: flex-end; padding: 16px 18px; color: var(--ink); font-weight: 700; overflow: hidden; position: relative; }
+    .g span { position: relative; z-index: 1; background: rgba(255,251,247,.86); padding: 6px 10px; border-radius: 999px; font-size: 13px; }
+    .g:nth-child(1) { grid-row: 1 / span 2; background: linear-gradient(180deg, #D7E6F2, #E8C8B6); }
+    .g:nth-child(2) { background: linear-gradient(135deg, #E8D7A8, #C9E0C8); }
+    .g:nth-child(3) { background: linear-gradient(135deg, #E8C5D0, #D6C8EA); }
+    .g:nth-child(4) { background: linear-gradient(135deg, #C9E4D6, #E8E0C0); }
+    .g:nth-child(5) { background: linear-gradient(135deg, #F0D0C0, #E8DCC8); }
+
+    .reviews { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; }
+    .rev { background: var(--paper); border-radius: 24px; padding: 24px; border: 1px solid #efe7dc; }
+    .stars { color: #C56A4A; letter-spacing: 2px; margin-bottom: 12px; font-size: 14px; }
+    .rev p { font-size: 16px; }
+    .who { margin-top: 16px; font-weight: 700; font-size: 14px; color: var(--muted); }
+
+    .contact-grid { display: grid; grid-template-columns: .9fr 1.1fr; gap: 24px; align-items: start; }
+    .map {
+      background: linear-gradient(180deg, #D9E6D8, #E8E0D0);
+      border-radius: 32px; min-height: 100%; min-height: 420px;
+      padding: 28px; display: flex; flex-direction: column; justify-content: flex-end;
+      position: relative; overflow: hidden;
+    }
+    .pin { width: 56px; height: 56px; border-radius: 50%; background: var(--peach-d); color: #fff; display: grid; place-items: center; font-weight: 800; box-shadow: 0 10px 20px rgba(197,106,74,.3); position: absolute; top: 38%; left: 46%; }
+    .addr { background: var(--paper); border-radius: 20px; padding: 18px 20px; position: relative; z-index: 1; }
+    .addr b { display: block; margin-bottom: 4px; }
+    .addr p { color: var(--muted); font-size: 15px; }
+
+    .form {
+      background: var(--paper); border-radius: 32px; padding: 32px 28px;
+      border: 1px solid #efe7dc; box-shadow: var(--shadow);
+    }
+    .form h2 { font-size: 32px; letter-spacing: -.03em; margin-bottom: 8px; }
+    .form .sub { color: var(--muted); margin-bottom: 22px; }
+    .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+    label.f { display: flex; flex-direction: column; gap: 6px; font-weight: 700; font-size: 13px; margin-bottom: 14px; }
+    input, select, textarea {
+      font: inherit; font-weight: 500; font-size: 16px; color: var(--ink);
+      background: #F7F1EA; border: 1px solid #E6DCD0; border-radius: 14px;
+      padding: 12px 14px; outline: none; width: 100%;
+    }
+    input:focus, select:focus, textarea:focus { border-color: var(--sage); background: #fff; }
+    textarea { min-height: 96px; resize: vertical; }
+    .consent { display: flex; gap: 10px; align-items: flex-start; font-weight: 600; font-size: 14px; color: var(--muted); margin: 6px 0 18px; }
+    .consent input { width: 18px; height: 18px; margin-top: 2px; accent-color: var(--sage-d); flex: none; }
+    .form .btn { width: 100%; padding: 14px; font-size: 16px; }
+
+    html, body { overflow-x: hidden; }
+    .foot-brand { display: flex; align-items: center; gap: 12px; }
+    .foot-brand img { width: 40px; height: 40px; flex: none; object-fit: contain; }
+    [data-lead-status] { font-weight: 700; font-size: 14px; margin-top: 12px; }
+    [data-lead-status][data-ok="1"] { color: var(--sage-d); }
+    [data-lead-status][data-ok="0"] { color: #9a3b2f; }
+    footer { padding: 36px 0 48px; border-top: 1px solid var(--line); color: var(--muted); font-size: 14px; }
+    .foot { display: flex; justify-content: space-between; gap: 20px; flex-wrap: wrap; }
+    .mock-note { font-size: 12px; opacity: .8; }
+
+    @media (max-width: 980px) {
+      .hero-grid, .bday, .contact-grid, .zones, .steps, .tickets, .reviews, .stats, .grid-2 { grid-template-columns: 1fr 1fr; }
+      .zones { grid-template-columns: 1fr 1fr; }
+      .gallery { grid-template-columns: 1fr 1fr; grid-template-rows: 160px 160px 160px; }
+      .g:nth-child(1) { grid-row: auto; min-height: 200px; }
+    }
+    @media (max-width: 720px) {
+      .nav, .top .btn { display: none; }
+      #nav-toggle:checked ~ .nav { display: flex; position: absolute; top: 76px; left: 0; right: 0; flex-direction: column; background: var(--bg); padding: 16px 20px 24px; border-bottom: 1px solid var(--line); align-items: flex-start; }
+      .burger { display: grid; width: 42px; height: 42px; place-items: center; border-radius: 12px; background: #fff; border: 1px solid var(--line); cursor: pointer; }
+      .burger span, .burger span:before, .burger span:after {
+        content: ""; display: block; width: 18px; height: 2px; background: var(--ink); position: relative;
+      }
+      .burger span:before { position: absolute; top: -6px; }
+      .burger span:after { position: absolute; top: 6px; }
+      .hero-grid, .bday, .contact-grid, .zones, .steps, .tickets, .reviews, .stats, .grid-2, .gallery { grid-template-columns: 1fr; }
+      .gallery { grid-template-rows: none; }
+      .g, .g:nth-child(1) { min-height: 150px; }
+      section { padding: 56px 0; }
+      .hero-art { min-height: 280px; }
+      .top-inner { min-height: 64px; }
+      .sched thead { display: none; }
+      .sched, .sched tbody, .sched tr, .sched td { display: block; width: 100%; }
+      .sched tr { padding: 14px 20px; border-bottom: 1px solid var(--line); }
+      .sched td { padding: 2px 0; border: 0; }
+      .sched td:first-child { font-weight: 800; padding-top: 0; }
+    }
+  </style>
+</head>
+<body>
+  <header class="top">
+    <div class="top-inner">
+      <a class="logo" href="#top">
+        <img class="logo-mark" src="../assets/logo-icon.png" width="48" height="48" alt="">
+        Мой Город Мечты
+      </a>
+      <input type="checkbox" id="nav-toggle" />
+      <label class="burger" for="nav-toggle" aria-label="Меню"><span></span></label>
+      <nav class="nav">
+        <a href="#zony">Зоны</a>
+        <a href="#prazdniki">Праздники</a>
+        <a href="#ceny">Билеты</a>
+        <a href="#rasp">Расписание</a>
+        <a href="#otzyvy">Отзывы</a>
+        <a href="#kontakty">Контакты</a>
+        <a class="btn" href="#zapisatsya">Записаться</a>
+      </nav>
+    </div>
+  </header>
+
+  <main id="top">
+    <section class="hero">
+      <div class="wrap hero-grid">
+        <div>
+          <div class="eyebrow">Детский город профессий · макет</div>
+          <h1>Город, где дети пробуют взрослую жизнь <span>без спешки</span></h1>
+          <p class="lead">Мягкое пространство для игры, ролей и первых самостоятельных дел. Ребёнок выбирает профессию, знакомится с городом, а взрослые рядом — спокойно и без лишнего шума.</p>
+          <div class="hero-actions">
+            <a class="btn" href="#zapisatsya">Записаться</a>
+            <a class="btn btn-ghost" href="#zony">Смотреть зоны</a>
+          </div>
+        </div>
+        <div class="hero-art" aria-hidden="true">
+          <svg viewBox="0 0 640 420" role="img">
+            <title>Пастельный город</title>
+            <ellipse cx="120" cy="70" rx="46" ry="22" fill="#fff" opacity=".9"/>
+            <ellipse cx="150" cy="70" rx="28" ry="16" fill="#fff"/>
+            <ellipse cx="500" cy="56" rx="54" ry="24" fill="#fff" opacity=".85"/>
+            <circle cx="560" cy="70" r="28" fill="#F3E2B0"/>
+            <rect x="70" y="200" width="90" height="150" rx="18" fill="#E8C4B4"/>
+            <rect x="86" y="220" width="18" height="22" rx="4" fill="#FFF8F3"/>
+            <rect x="126" y="220" width="18" height="22" rx="4" fill="#FFF8F3"/>
+            <rect x="86" y="256" width="18" height="22" rx="4" fill="#FFF8F3"/>
+            <rect x="126" y="256" width="18" height="22" rx="4" fill="#FFF8F3"/>
+            <rect x="175" y="160" width="110" height="190" rx="20" fill="#A7C4B2"/>
+            <rect x="198" y="184" width="22" height="26" rx="5" fill="#F7FFF9"/>
+            <rect x="240" y="184" width="22" height="26" rx="5" fill="#F7FFF9"/>
+            <rect x="198" y="226" width="22" height="26" rx="5" fill="#F7FFF9"/>
+            <rect x="240" y="226" width="22" height="26" rx="5" fill="#F7FFF9"/>
+            <path d="M230 118h30v42h-30z" fill="#A7C4B2"/>
+            <circle cx="245" cy="112" r="10" fill="#C56A4A"/>
+            <rect x="300" y="190" width="130" height="160" rx="18" fill="#C9D6E8"/>
+            <rect x="322" y="214" width="26" height="28" rx="5" fill="#F4F8FC"/>
+            <rect x="362" y="214" width="26" height="28" rx="5" fill="#F4F8FC"/>
+            <rect x="322" y="256" width="26" height="28" rx="5" fill="#F4F8FC"/>
+            <rect x="362" y="256" width="26" height="28" rx="5" fill="#F4F8FC"/>
+            <rect x="318" y="160" width="96" height="30" rx="8" fill="#B7C8DC"/>
+            <rect x="445" y="150" width="100" height="200" rx="20" fill="#E8D39A"/>
+            <rect x="468" y="176" width="22" height="26" rx="5" fill="#FFF8E8"/>
+            <rect x="508" y="176" width="22" height="26" rx="5" fill="#FFF8E8"/>
+            <rect x="468" y="216" width="22" height="26" rx="5" fill="#FFF8E8"/>
+            <rect x="508" y="216" width="22" height="26" rx="5" fill="#FFF8E8"/>
+            <rect x="548" y="220" width="70" height="130" rx="16" fill="#E7B7BC"/>
+            <rect x="564" y="240" width="16" height="20" rx="4" fill="#FFF5F6"/>
+            <rect x="588" y="240" width="16" height="20" rx="4" fill="#FFF5F6"/>
+            <rect x="40" y="348" width="580" height="18" rx="8" fill="#E2D4C4"/>
+            <circle cx="90" cy="348" r="22" fill="#7FA98F"/>
+            <rect x="86" y="310" width="8" height="28" fill="#6B8F6A"/>
+            <circle cx="420" cy="348" r="26" fill="#8FBEA0"/>
+            <rect x="415" y="304" width="10" height="30" fill="#6B8F6A"/>
+            <ellipse cx="200" cy="300" rx="16" ry="10" fill="#C56A4A" opacity=".85"/>
+            <rect x="196" y="270" width="8" height="30" fill="#6A4A3A"/>
+            <circle cx="260" cy="318" r="14" fill="#F4EFE8"/>
+            <circle cx="290" cy="322" r="18" fill="#F4EFE8"/>
+            <circle cx="318" cy="320" r="12" fill="#F4EFE8"/>
+          </svg>
+        </div>
+      </div>
+      <div class="wrap">
+        <div class="stats">
+          <div class="stat"><b>8 зон</b><span>профессий и игры</span></div>
+          <div class="stat"><b>3–12 лет</b><span>примерный возраст</span></div>
+          <div class="stat"><b>весь день</b><span>без спешки по таймеру</span></div>
+          <div class="stat"><b>рядом</b><span>взрослые остаются в городе</span></div>
+        </div>
+      </div>
+    </section>
+
+    <section id="zony">
+      <div class="wrap">
+        <div class="sec-h">
+          <div class="kicker">Пространство</div>
+          <h2>Кварталы города, которые можно выбрать за день</h2>
+          <p>Каждая зона — отдельная история. Ребёнок пробует роль, договаривается, считает и чуть-чуть взрослеет в игре. Названия и состав зон в макете — примерные.</p>
+        </div>
+        <div class="zones">
+          <article class="zone"><div class="ico" style="background:#F3E0C4">
+            <svg width="30" height="30" viewBox="0 0 30 30"><path d="M6 22h18v3H6zM8 22V12l7-5 7 5v10" fill="none" stroke="#8A5A32" stroke-width="1.8"/><circle cx="15" cy="16" r="2.2" fill="#C56A4A"/></svg>
+          </div><h3>Пекарня и кафе</h3><p>Печём, подаём заказ и учимся быть внимательными к гостю.</p></article>
+          <article class="zone"><div class="ico" style="background:#D9E8E2">
+            <svg width="30" height="30" viewBox="0 0 30 30"><rect x="7" y="8" width="16" height="14" rx="3" fill="none" stroke="#3E6F58" stroke-width="1.8"/><path d="M15 12v6M12 15h6" stroke="#3E6F58" stroke-width="1.8" stroke-linecap="round"/></svg>
+          </div><h3>Больница</h3><p>Заботимся об игрушечных пациентах, выдаём «рецепты» и учимся помогать.</p></article>
+          <article class="zone"><div class="ico" style="background:#F0D4D2">
+            <svg width="30" height="30" viewBox="0 0 30 30"><path d="M8 22h14l-2-8H10l-2 8z" fill="none" stroke="#A94B3A" stroke-width="1.8"/><path d="M15 8v6M12 11h6" stroke="#A94B3A" stroke-width="1.8" stroke-linecap="round"/></svg>
+          </div><h3>Пожарная часть</h3><p>Собираемся в команду, едем на вызов и аккуратно «спасаем» город.</p></article>
+          <article class="zone"><div class="ico" style="background:#DDE4F0">
+            <svg width="30" height="30" viewBox="0 0 30 30"><rect x="6" y="10" width="18" height="12" rx="2" fill="none" stroke="#5A738C" stroke-width="1.8"/><path d="M10 10V8h10v2" stroke="#5A738C" stroke-width="1.8"/></svg>
+          </div><h3>Банк и магазин</h3><p>Считаем игровую валюту, принимаем решения и чуть-чуть учимся планировать.</p></article>
+          <article class="zone"><div class="ico" style="background:#E7DCF0">
+            <svg width="30" height="30" viewBox="0 0 30 30"><rect x="6" y="9" width="18" height="12" rx="2" fill="none" stroke="#6A5080" stroke-width="1.8"/><circle cx="15" cy="15" r="2.5" fill="#6A5080"/></svg>
+          </div><h3>Телестудия</h3><p>Снимаем новости города, пробуем микрофон и придумываем сюжет.</p></article>
+          <article class="zone"><div class="ico" style="background:#E6E0C8">
+            <svg width="30" height="30" viewBox="0 0 30 30"><path d="M8 20h14M10 20V12h4v8M16 20v-6h4v6" fill="none" stroke="#6A5A28" stroke-width="1.8"/></svg>
+          </div><h3>Мастерская</h3><p>Строим, чиним и собираем то, что придумал сам ребёнок.</p></article>
+          <article class="zone"><div class="ico" style="background:#F0DDE4">
+            <svg width="30" height="30" viewBox="0 0 30 30"><path d="M6 20c4-8 14-8 18 0" fill="none" stroke="#8A4A60" stroke-width="1.8"/><circle cx="15" cy="10" r="3" fill="#8A4A60"/></svg>
+          </div><h3>Театр и сцена</h3><p>Выбираем роль, репетируем и показываем маленький спектакль.</p></article>
+          <article class="zone"><div class="ico" style="background:#E4F0EA">
+            <svg width="30" height="30" viewBox="0 0 30 30"><circle cx="11" cy="16" r="5" fill="none" stroke="#3E6F58" stroke-width="1.8"/><circle cx="19" cy="16" r="5" fill="none" stroke="#3E6F58" stroke-width="1.8"/></svg>
+          </div><h3>Зона малышей</h3><p>Тише и мягче: для тех, кто ещё только знакомится с городом.</p></article>
+        </div>
+      </div>
+    </section>
+
+    <section class="day" id="den">
+      <div class="wrap">
+        <div class="sec-h">
+          <div class="kicker">Как это устроено</div>
+          <h2>Один спокойный день в городе</h2>
+          <p>Без гонки по станциям. Ребёнок сам выбирает маршрут, а мы держим ритм мягким.</p>
+        </div>
+        <div class="steps">
+          <article class="step"><div class="n">01</div><h3>Встречаем</h3><p>Знакомимся, выдаём игровой паспорт и коротко рассказываем, как устроен город.</p></article>
+          <article class="step"><div class="n">02</div><h3>Выбираем роль</h3><p>Пекарь, врач, репортёр или мастер — можно попробовать несколько зон за день.</p></article>
+          <article class="step"><div class="n">03</div><h3>Играем</h3><p>Выполняем простые задания, получаем игровую валюту и тратим её в городе.</p></article>
+          <article class="step"><div class="n">04</div><h3>Завершаем</h3><p>Делимся, что понравилось, и уходим без суеты. Взрослые всё это время рядом.</p></article>
+        </div>
+      </div>
+    </section>
+
+    <section id="prazdniki">
+      <div class="wrap bday">
+        <div>
+          <div class="kicker">Праздники</div>
+          <h2>День рождения в Городе Мечты</h2>
+          <p class="lead" style="margin-top:12px">Именинник становится героем своего города: своя программа, комната праздника и время для игры. Детали меню и сценария в макете условные — их уточним позже.</p>
+          <ul class="bday-list">
+            <li><span class="dot"></span>Встреча гостей и короткая экскурсия по городу</li>
+            <li><span class="dot"></span>Игровая программа и мастер-класс</li>
+            <li><span class="dot"></span>Комната праздника и стол для угощения</li>
+            <li><span class="dot"></span>Время свободной игры в зонах</li>
+          </ul>
+          <div class="hero-actions"><a class="btn" href="#zapisatsya">Оставить заявку на праздник</a></div>
+        </div>
+        <div class="bday-card" aria-hidden="true">
+          <svg viewBox="0 0 420 360" width="100%" height="100%">
+            <ellipse cx="210" cy="300" rx="150" ry="22" fill="#fff" opacity=".35"/>
+            <rect x="90" y="160" width="240" height="130" rx="24" fill="#FFFBF7"/>
+            <rect x="110" y="180" width="80" height="10" rx="5" fill="#E8C4B4"/>
+            <rect x="110" y="200" width="140" height="8" rx="4" fill="#E6DCD0"/>
+            <rect x="110" y="216" width="110" height="8" rx="4" fill="#E6DCD0"/>
+            <circle cx="300" cy="120" r="36" fill="#F3E2B0"/>
+            <rect x="160" y="80" width="16" height="90" fill="#C56A4A"/>
+            <ellipse cx="168" cy="78" rx="28" ry="36" fill="#E8B7C0"/>
+            <rect x="220" y="70" width="16" height="100" fill="#3E6F58"/>
+            <ellipse cx="228" cy="68" rx="30" ry="38" fill="#A7C4B2"/>
+            <rect x="270" y="90" width="14" height="80" fill="#5A738C"/>
+            <ellipse cx="277" cy="88" rx="24" ry="32" fill="#C9D6E8"/>
+          </svg>
+        </div>
+      </div>
+    </section>
+
+    <section id="ceny" style="background:#EFE6DA">
+      <div class="wrap">
+        <div class="sec-h">
+          <div class="kicker">Билеты</div>
+          <h2>Форматы посещения</h2>
+          <p>Цены в макете не указаны специально. Когда появятся точные тарифы, их можно аккуратно поставить на эти карточки.</p>
+        </div>
+        <div class="tickets">
+          <article class="ticket">
+            <h3>Будни</h3>
+            <p>Спокойный день, меньше гостей, больше времени на любимую зону.</p>
+            <div class="price">по запросу</div>
+            <div class="price-note">Стоимость уточним отдельно</div>
+            <ul>
+              <li>Вход в игровые зоны</li>
+              <li>Игровой паспорт</li>
+              <li>Сопровождающий — по правилам парка</li>
+            </ul>
+          </article>
+          <article class="ticket featured">
+            <h3>Выходной</h3>
+            <p>Полный день в городе: зоны, короткие активности и свободная игра.</p>
+            <div class="price">по запросу</div>
+            <div class="price-note">Пример карточки для выходного тарифа</div>
+            <ul>
+              <li>Весь день без жёсткого лимита</li>
+              <li>Доступ к основным зонам</li>
+              <li>Можно добавить праздник</li>
+            </ul>
+          </article>
+          <article class="ticket">
+            <h3>Праздник</h3>
+            <p>День рождения или семейный повод — собираем программу под запрос.</p>
+            <div class="price">индивидуально</div>
+            <div class="price-note">Состав и длительность согласовываем</div>
+            <ul>
+              <li>Комната праздника</li>
+              <li>Ведущий и сценарий</li>
+              <li>Игра для гостей именинника</li>
+            </ul>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section id="rasp">
+      <div class="wrap">
+        <div class="sec-h">
+          <div class="kicker">Расписание</div>
+          <h2>Когда город открыт</h2>
+          <p>Часы ниже — только для макета, чтобы было видно, как ляжет таблица. Реальный график появится позже.</p>
+        </div>
+        <table class="sched">
+          <thead><tr><th>День</th><th>Часы в макете</th><th>Комментарий</th></tr></thead>
+          <tbody>
+            <tr><td>Понедельник — пятница</td><td>10:00 – 20:00</td><td>Пример для будней</td></tr>
+            <tr><td>Суббота и воскресенье</td><td>10:00 – 21:00</td><td>Пример для выходных</td></tr>
+            <tr><td>Праздничные дни</td><td>уточняется</td><td>График сообщим отдельно</td></tr>
+          </tbody>
+        </table>
+        <p class="note">Это макет сайта: адрес, телефон, цены и точные часы работы пока не утверждены.</p>
+      </div>
+    </section>
+
+    <section id="galereya" style="background:#EFE6DA">
+      <div class="wrap">
+        <div class="sec-h">
+          <div class="kicker">Галерея</div>
+          <h2>Как может выглядеть атмосфера</h2>
+          <p>Пока без настоящих фотографий: мягкие цветовые планы, чтобы понять настроение и ритм страницы.</p>
+        </div>
+        <div class="gallery">
+          <div class="g"><span>Главная улица города</span></div>
+          <div class="g"><span>Пекарня</span></div>
+          <div class="g"><span>Сцена</span></div>
+          <div class="g"><span>Зона малышей</span></div>
+          <div class="g"><span>Мастерская</span></div>
+        </div>
+      </div>
+    </section>
+
+    <section id="otzyvy">
+      <div class="wrap">
+        <div class="sec-h">
+          <div class="kicker">Отзывы</div>
+          <h2>Какие голоса хотим услышать позже</h2>
+          <p>Тексты ниже выдуманы для макета и не являются настоящими отзывами.</p>
+        </div>
+        <div class="reviews">
+          <article class="rev"><div class="stars">★★★★★</div><p>«Ребёнок сам выбрал, кем быть, и два часа провёл в пекарне. Мне было спокойно сидеть рядом — без гонки и громкой музыки.»</p><div class="who">Анна, мама 6-летней Лизы · пример</div></article>
+          <article class="rev"><div class="stars">★★★★★</div><p>«Понравилось, что зоны не кричат цветом. Город кажется светлым и понятным, даже если приходишь первый раз.»</p><div class="who">Дмитрий, папа двоих детей · пример</div></article>
+          <article class="rev"><div class="stars">★★★★★</div><p>«На день рождения взяли комнату и программу. Дети не устали от шоу — больше играли сами, и это было как раз то, что нужно.»</p><div class="who">Марина, мама именинника · пример</div></article>
+        </div>
+      </div>
+    </section>
+
+    <section id="kontakty" style="padding-bottom: 40px;">
+      <div class="wrap contact-grid">
+        <div>
+          <div class="kicker">Контакты</div>
+          <h2 style="font-size:36px;letter-spacing:-.03em;margin:0 0 16px">Приезжайте, когда будем готовы вас встретить</h2>
+          <div class="map">
+            <div class="pin">М</div>
+            <div class="addr">
+              <b>Адрес появится позже</b>
+              <p>Город, улица и ориентир пока не указываем — в макете только место для карты.</p>
+              <p style="margin-top:8px">Телефон: +7 (000) 000-00-00<br>Почта: hello@example.com</p>
+            </div>
+          </div>
+        </div>
+        <div class="form" id="zapisatsya">
+          <h2>Записаться</h2>
+          <p class="sub">Оставьте заявку — это макет формы, она никуда не отправляется. Когда сайт заработает, заявки можно будет принимать по-настоящему.</p>
+          <form action="#" method="post" data-lead-form="Макет 1 · Воздушный город">
+            <div class="grid-2">
+              <label class="f">Имя
+                <input type="text" name="name" placeholder="Как к вам обращаться" autocomplete="name" required />
+              </label>
+              <label class="f">Телефон
+                <input type="tel" name="phone" placeholder="+7 (000) 000-00-00" autocomplete="tel" required />
+              </label>
+            </div>
+            <div class="grid-2">
+              <label class="f">Дата
+                <input type="text" name="date" placeholder="дд.мм.гггг" inputmode="numeric" />
+              </label>
+              <label class="f">Услуга или зона
+                <select name="service">
+                  <option value="">Выберите вариант</option>
+                  <option>Посещение города</option>
+                  <option>День рождения</option>
+                  <option>Пекарня и кафе</option>
+                  <option>Больница</option>
+                  <option>Пожарная часть</option>
+                  <option>Банк и магазин</option>
+                  <option>Телестудия</option>
+                  <option>Мастерская</option>
+                  <option>Театр и сцена</option>
+                  <option>Зона малышей</option>
+                </select>
+              </label>
+            </div>
+            <label class="f">Комментарий
+              <textarea name="comment" placeholder="Возраст ребёнка, повод визита или удобное время"></textarea>
+            </label>
+            <label class="consent">
+              <input type="checkbox" name="consent" required />
+              <span>Согласен(а) на обработку персональных данных. Текст согласия в макете условный.</span>
+            </label>
+            <input name="website" tabindex="-1" autocomplete="off" aria-hidden="true" style="position:absolute;left:-9999px">
+            <button class="btn" type="submit">Записаться</button>
+          </form>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="wrap foot">
+      <div class="foot-brand">
+        <img src="../assets/logo-icon.png" width="40" height="40" alt="">
+        <div>
+          <strong style="color:var(--ink)">Мой Город Мечты</strong>
+          <div>Детский город профессий. Макет первой версии.</div>
+        </div>
+      </div>
+      <div class="mock-note">Контент-заполнитель: адрес, телефон, цены и отзывы не настоящие.<br>Направление 1 из 3 · «Воздушный город»</div>
+    </div>
+  </footer>
+  <script src="form-client.js"></script>
+</body>
+</html>

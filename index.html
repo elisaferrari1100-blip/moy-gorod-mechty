@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Мой Город Мечты — макеты сайта</title>
+  <link rel="icon" href="assets/favicon.ico" sizes="any" />
+  <link rel="icon" type="image/png" sizes="32x32" href="assets/favicon-32.png" />
+  <link rel="apple-touch-icon" href="assets/favicon-180.png" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --bg: #F6F0E8;
+      --paper: #FFFBF7;
+      --ink: #2C2825;
+      --muted: #5C554E;
+      --line: #E6DCD0;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: Nunito, system-ui, sans-serif;
+      background: var(--bg);
+      color: var(--ink);
+      line-height: 1.55;
+      min-height: 100vh;
+    }
+    a { color: inherit; text-decoration: none; }
+    img { display: block; max-width: 100%; }
+    .wrap { width: min(1160px, calc(100% - 40px)); margin: 0 auto; }
+    header { padding: 36px 0 10px; text-align: center; }
+    .brand { display: inline-block; }
+    .brand img { height: 88px; width: auto; margin: 0 auto; }
+    h1 { font-size: clamp(28px, 4vw, 42px); letter-spacing: -.03em; margin: 28px 0 10px; }
+    .lead { color: var(--muted); font-size: 18px; max-width: 640px; margin: 0 auto 36px; }
+    .grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 22px; padding-bottom: 64px; }
+    .card {
+      background: var(--paper);
+      border-radius: 28px;
+      overflow: hidden;
+      border: 1px solid #efe7dc;
+      box-shadow: 0 16px 36px rgba(80,60,40,.07);
+      display: flex;
+      flex-direction: column;
+      transition: transform .2s ease, box-shadow .2s ease;
+    }
+    .card:hover { transform: translateY(-4px); box-shadow: 0 22px 40px rgba(80,60,40,.12); }
+    .card .preview { aspect-ratio: 16/10; overflow: hidden; background: #efe7dc; }
+    .card .preview img { width: 100%; height: 100%; object-fit: cover; object-position: top center; }
+    .card .body { padding: 20px 22px 22px; display: flex; flex-direction: column; gap: 8px; flex: 1; }
+    .kicker { font-weight: 800; font-size: 12px; letter-spacing: .12em; text-transform: uppercase; }
+    .card h2 { font-size: 22px; letter-spacing: -.02em; }
+    .card p { color: var(--muted); font-size: 15px; flex: 1; }
+    .go {
+      display: inline-flex; align-items: center; justify-content: center;
+      margin-top: 10px; padding: 11px 18px; border-radius: 999px;
+      font-weight: 700; font-size: 14px; color: #fff;
+    }
+    .c1 .kicker { color: #3E6F58; } .c1 .go { background: #3E6F58; }
+    .c2 .kicker { color: #2F7A5C; } .c2 .go { background: #2F7A5C; }
+    .c3 .kicker { color: #A85B42; } .c3 .go { background: #A85B42; }
+    footer { padding: 10px 0 48px; color: var(--muted); font-size: 13px; text-align: center; }
+    @media (max-width: 860px) { .grid { grid-template-columns: 1fr; } .brand img { height: 72px; } }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="wrap">
+      <a class="brand" href="./">
+        <img src="assets/logo-horizontal.png" alt="Мой Город Мечты" />
+      </a>
+      <h1>Три направления макета</h1>
+      <p class="lead">Выберите вариант, который ближе по настроению. Это только макеты: адрес, телефон, цены и отзывы — заглушки. Когда направление утвердим, можно собирать настоящий сайт.</p>
+    </div>
+  </header>
+  <main class="wrap">
+    <div class="grid">
+      <a class="card c1" href="v1/">
+        <div class="preview"><img src="assets/preview-v1.png" alt="Макет 1: первый экран"></div>
+        <div class="body">
+          <div class="kicker">Макет 1</div>
+          <h2>Воздушный город</h2>
+          <p>Мягкий и просторный, как утро. Nunito, персик и шалфей, классический первый экран с городом-иллюстрацией.</p>
+          <span class="go">Открыть макет</span>
+        </div>
+      </a>
+      <a class="card c2" href="v2/">
+        <div class="preview"><img src="assets/preview-v2.png" alt="Макет 2: первый экран"></div>
+        <div class="body">
+          <div class="kicker">Макет 2</div>
+          <h2>Мятные кварталы</h2>
+          <p>Более игривый: город как карта. Comfortaa, мята и лаванда, билеты-корешки и расписание на неделю.</p>
+          <span class="go">Открыть макет</span>
+        </div>
+      </a>
+      <a class="card c3" href="v3/">
+        <div class="preview"><img src="assets/preview-v3.png" alt="Макет 3: первый экран"></div>
+        <div class="body">
+          <div class="kicker">Макет 3</div>
+          <h2>Тёплый квартал</h2>
+          <p>Спокойный, почти журнальный. Montserrat Alternates, терракота и сирень, крупная типографика и меньше «мультяшности».</p>
+          <span class="go">Открыть макет</span>
+        </div>
+      </a>
+    </div>
+  </main>
+  <footer>
+    <div class="wrap">Мой Город Мечты · макеты для выбора направления · не финальный сайт</div>
+  </footer>
+</body>
+</html>
