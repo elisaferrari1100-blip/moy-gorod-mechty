@@ -39,14 +39,27 @@
     }
     .btn-line { background: transparent; color: var(--ink); border: 1px solid var(--ink); }
 
+    :root { --header-h: 78px; }
+    body { padding-top: var(--header-h); }
+    #zony, #prazdniki, #ceny, #rasp, #galereya, #otzyvy, #kontakty, #zapisatsya {
+      scroll-margin-top: calc(var(--header-h) + 16px);
+    }
     header.top {
-      position: sticky; top: 0; z-index: 20;
-      background: rgba(248,243,236,.92); backdrop-filter: blur(16px);
+      position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+      background: rgba(248, 243, 236, .86);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
       border-bottom: 1px solid var(--line);
+      transition: box-shadow .2s ease, background .2s ease;
+    }
+    header.top.is-scrolled {
+      background: rgba(248, 243, 236, .96);
+      box-shadow: 0 8px 24px rgba(50, 41, 35, .10);
     }
     .top-inner {
       width: min(1140px, calc(100% - 40px)); margin: 0 auto;
       display: flex; align-items: center; justify-content: space-between; min-height: 78px;
+      position: relative;
     }
     .wordmark { display: flex; align-items: center; gap: 12px; font-family: "Montserrat Alternates", sans-serif; font-weight: 700; font-size: 15px; letter-spacing: .08em; text-transform: uppercase; }
     .wordmark .logo-mark { width: 48px; height: 48px; flex: none; object-fit: contain; display: block; }
@@ -178,8 +191,17 @@
     }
     @media (max-width: 720px) {
       .nav { display: none; }
-      #nav-toggle:checked ~ .nav { display: flex; flex-direction: column; position: absolute; left: 0; right: 0; top: 78px; background: var(--bg); padding: 16px 20px 24px; align-items: flex-start; border-bottom: 1px solid var(--line); }
-      .top-inner { position: relative; }
+      :root { --header-h: 64px; }
+      .top-inner { min-height: 64px; position: relative; }
+      #nav-toggle:checked ~ .nav {
+        display: flex; flex-direction: column; position: absolute;
+        left: 0; right: 0; top: 100%; z-index: 101;
+        background: rgba(248, 243, 236, .97);
+        backdrop-filter: blur(16px); -webkit-backdrop-filter: blur(16px);
+        padding: 16px 20px 24px; align-items: flex-start;
+        border-bottom: 1px solid var(--line);
+        box-shadow: 0 12px 24px rgba(50, 41, 35, .08);
+      }
       .burger { display: grid; width: 40px; height: 40px; place-items: center; border: 1px solid var(--ink); cursor: pointer; }
       .burger span, .burger span:before, .burger span:after { content:""; display:block; width:16px; height:1.5px; background: var(--ink); position: relative; }
       .burger span:before { position:absolute; top:-5px; } .burger span:after { position:absolute; top:5px; }
@@ -421,6 +443,17 @@
       <div>Контент-заполнитель: адрес, телефон, цены и отзывы не настоящие.<br>Направление 3 из 3 · «Тёплый квартал»</div>
     </div>
   </footer>
+  <script>
+    (function () {
+      var bar = document.querySelector("header.top");
+      if (!bar) return;
+      var update = function () {
+        bar.classList.toggle("is-scrolled", window.scrollY > 8);
+      };
+      update();
+      window.addEventListener("scroll", update, { passive: true });
+    })();
+  </script>
   <script src="form-client.js"></script>
 </body>
 </html>

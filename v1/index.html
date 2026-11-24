@@ -42,18 +42,30 @@
     .wrap { width: min(1160px, calc(100% - 40px)); margin: 0 auto; }
     .sr { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0,0,0,0); }
 
+    :root { --header-h: 76px; }
+    body { padding-top: var(--header-h); }
+    #zony, #prazdniki, #ceny, #rasp, #galereya, #otzyvy, #kontakty, #zapisatsya, #den {
+      scroll-margin-top: calc(var(--header-h) + 16px);
+    }
     /* header */
     .top {
-      position: sticky; top: 0; z-index: 20;
-      background: rgba(246, 240, 232, .9);
+      position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+      background: rgba(246, 240, 232, .86);
       backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
       border-bottom: 1px solid rgba(230, 220, 208, .7);
+      transition: box-shadow .2s ease, background .2s ease;
+    }
+    .top.is-scrolled {
+      background: rgba(246, 240, 232, .96);
+      box-shadow: 0 8px 24px rgba(80, 60, 40, .10);
     }
     .top-inner {
       width: min(1160px, calc(100% - 40px));
       margin: 0 auto;
       display: flex; align-items: center; justify-content: space-between;
       min-height: 76px; gap: 24px;
+      position: relative;
     }
     .logo { display: flex; align-items: center; gap: 12px; font-weight: 800; font-size: 18px; letter-spacing: -.02em; }
     .logo-mark { width: 48px; height: 48px; flex: none; object-fit: contain; display: block; }
@@ -224,7 +236,15 @@
     }
     @media (max-width: 720px) {
       .nav, .top .btn { display: none; }
-      #nav-toggle:checked ~ .nav { display: flex; position: absolute; top: 76px; left: 0; right: 0; flex-direction: column; background: var(--bg); padding: 16px 20px 24px; border-bottom: 1px solid var(--line); align-items: flex-start; }
+      :root { --header-h: 64px; }
+      #nav-toggle:checked ~ .nav {
+        display: flex; position: absolute; top: 100%; left: 0; right: 0; z-index: 101;
+        flex-direction: column; align-items: flex-start;
+        background: rgba(246, 240, 232, .97);
+        backdrop-filter: blur(16px); -webkit-backdrop-filter: blur(16px);
+        padding: 16px 20px 24px; border-bottom: 1px solid var(--line);
+        box-shadow: 0 12px 24px rgba(80, 60, 40, .08);
+      }
       .burger { display: grid; width: 42px; height: 42px; place-items: center; border-radius: 12px; background: #fff; border: 1px solid var(--line); cursor: pointer; }
       .burger span, .burger span:before, .burger span:after {
         content: ""; display: block; width: 18px; height: 2px; background: var(--ink); position: relative;
@@ -588,6 +608,17 @@
       <div class="mock-note">Контент-заполнитель: адрес, телефон, цены и отзывы не настоящие.<br>Направление 1 из 3 · «Воздушный город»</div>
     </div>
   </footer>
+  <script>
+    (function () {
+      var bar = document.querySelector("header.top");
+      if (!bar) return;
+      var update = function () {
+        bar.classList.toggle("is-scrolled", window.scrollY > 8);
+      };
+      update();
+      window.addEventListener("scroll", update, { passive: true });
+    })();
+  </script>
   <script src="form-client.js"></script>
 </body>
 </html>
